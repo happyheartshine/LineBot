@@ -12,7 +12,7 @@ export default function Home() {
   const [name, setName] = useState("");
   const [error, setError] = useState("");
   const [loading, setLoading] = useState(true);
-
+  const NEXT_PUBLIC_LIFF_ID="2000385185-oJdGpm79";
   useEffect(() => {
     const initializeLIFF = async () => {
       try {
@@ -20,8 +20,8 @@ export default function Home() {
         setError("");
         
         // Check if LIFF ID is configured
-        const liffId = process.env.NEXT_PUBLIC_LIFF_ID;
-        if (!liffId || liffId === "YOUR_LIFF_ID_HERE") {
+        const liffId = NEXT_PUBLIC_LIFF_ID;
+        if (!liffId) {
           throw new Error("LIFF ID not configured. Please set NEXT_PUBLIC_LIFF_ID in .env.local");
         }
 
@@ -36,7 +36,7 @@ export default function Home() {
           setName(profile.displayName);
         } else {
           console.log("User is not logged in, redirecting to login");
-          // liff.login();
+          liff.login();
         }
       } catch (err) {
         console.error("LIFF initialization error:", err);
